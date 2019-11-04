@@ -1,0 +1,15 @@
+geometry_msgs/PoseStamped goal_pose
+
+---
+
+duration elapsed_time
+float32 distance_traveled
+uint32 messages_sent
+
+---
+
+duration elapsed_time
+duration estimated_time_remaining
+duration time_since_fiducial
+float32 distance_traveled
+float32 distance_since_fiducial

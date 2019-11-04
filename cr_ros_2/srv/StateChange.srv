@@ -1,0 +1,5 @@
+string new_state
+string to_say
+geometry_msgs/Pose pose_to_pub
+---
+bool is_legal

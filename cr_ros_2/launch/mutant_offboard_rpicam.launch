@@ -1,0 +1,70 @@
+<!--
+  KeyOp launcher
+ -->
+
+<launch>
+  <!-- Load amcl map -->
+  <arg name="map_file" default="$(find cr_ros_2)/files/basement_map.yaml"/> <!-- _for_robot -->
+
+  <!-- bringup flask webpage -->
+  <include file="$(find cr_web)/launch/bringup.launch"/>
+  <!-- Start navigation -->
+  <include file="$(find cr_ros_2)/launch/mutant_navigation.launch">
+    <arg name="map_file" value="$(arg map_file)"/>
+    <arg name="scan_topic" value="scan_filter"/>
+    <arg name="open_rviz" value="true"/>
+    <arg name="move_forward_only" value="false"/>
+  </include>
+
+
+  <!-- Launch custom code -->
+  <node pkg="cr_ros_2" type="turtlebot_teleop_key.py" name="turtlebot_teleop_key" output="screen"></node>
+  <node pkg="cr_ros_2" type="message_switch.py" name="message_switch" output="screen"></node>
+  <!-- <node pkg="cr_ros_2" type="whereabouts.py" name="whereabouts" output="screen"></node> -->
+  <node pkg="cr_ros_2" type="lost_and_found.py" name="lost_and_found" output="screen"></node>
+  <node pkg="cr_ros_2" type="process_fid_transforms.py" name="process_fid_transforms" output="screen"></node>
+  <node pkg="cr_ros_2" type="hand_gesture.py" name="hand_gesture" output="screen"></node>
+  <node pkg="cr_ros_2" type="go_to_person.py" name="go_to_person" output="screen"></node>
+  <node pkg="cr_ros_2" type="voice_destination_pub.py" name="voice_destination_pub" output="screen"></node>
+  <!-- <node pkg="cr_ros_2" type="greet.py" name="greet" output="screen"></node> -->
+  <!-- <node pkg="cr_ros" type="package_sender.py" name="package_sender" output="screen"></node> -->
+  <!-- <node pkg="cr_ros" type="package_handler.py" name="package_handler" output="screen"></node> -->
+
+  <!--  Run the throttled feeds -->
+  <node pkg="topic_tools" type="throttle" name="cam_throttle" args="messages /raspicam_node/image/compressed 2" />
+
+  <!-- Run the aruco_detect node -->
+  <arg name="camera" default="raspicam_node"/>
+  <arg name="image" default="image"/>
+  <arg name="transport" default="compressed"/>
+  <arg name="fiducial_len" default="0.14"/>
+  <arg name="dictionary" default="7"/>
+
+  <node pkg="aruco_detect" name="aruco_detect"
+    type="aruco_detect" respawn="false">
+    <param name="image_transport" value="$(arg transport)"/>
+    <param name="publish_images" value="true" />
+    <param name="fiducial_len" value="$(arg fiducial_len)"/>
+    <param name="dictionary" value="$(arg dictionary)"/>
+    <param name="do_pose_estimation" value="true"/>
+    <remap from="/camera/compressed"
+        to="$(arg camera)/$(arg image)/$(arg transport)_throttle"/>
+    <remap from="/camera_info" to="$(arg camera)/camera_info"/>
+    <remap from="/fiducial_transforms" to="/fiducial_transforms" />
+  </node>
+
+  <!-- Publish static tfs for fiducials -->
+  <!-- Aruco tags anchor to the center of the tag!!!!!-->
+  <node pkg="tf" type="static_transform_publisher" name="camera_rotater" args="0 0 0 -0.09 -1.1472049 0 /fiducial_camera /rotated_fiducial_camera 100" />
+  <node pkg="tf" type="static_transform_publisher" name="camera_to_base" args="0 0 0.53 0 0 0 /rotated_fiducial_camera /fiducial_base 100" />
+  <node pkg="tf" type="static_transform_publisher" name="fid_120" args="16.90 28.56 0.8636 4.71238 3.14159 0 /map /fid_120 100" /> <!-- inside jordan's office -->
+  <node pkg="tf" type="static_transform_publisher" name="fid_141" args="10.8 25.635 0.7493 0 3.14159 0 /map /fid_141 100" /> <!-- wall outside tim's office -->
+  <node pkg="tf" type="static_transform_publisher" name="fid_153" args="19.6 21.8 0.825 0 3.14159 0 /map /fid_153 100" /> <!-- charging dock -->
+  <node pkg="tf" type="static_transform_publisher" name="fid_104" args="16.123 24.915 0.8121 1.57079 3.14159 0 /map /fid_104 100" />  <!-- trash can -->
+  <node pkg="tf" type="static_transform_publisher" name="fid_156" args="13.46 28.56 0.75406 4.71238 3.14159 0 /map /fid_156 100" /> <!-- Tim's office -->
+  <node pkg="tf" type="static_transform_publisher" name="fid_125" args="17.031 20.10 0.84455 1.57079 3.14159 0 /map /fid_125 100" />  <!-- brick tower -->
+  <node pkg="tf" type="static_transform_publisher" name="fid_160" args="19.796 23.505 0.79057 3.14159 3.14159 0 /map /fid_160 100" />  <!-- pitos office -->
+  <!-- <node pkg="tf" type="static_transform_publisher" name="map_to_base" args="0.0 0.0 0.10 0 0 0.0 /map /base_footprint 1000"/> -->
+
+
+</launch>
