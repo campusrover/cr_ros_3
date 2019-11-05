@@ -83,7 +83,7 @@ def publish_for_second(twist):
         spin_pub.publish(twist)
         rate.sleep()
 
-rospy.init_node('lost_and_found')
+rospy.init_node('pickup_recovery')
 """ TODO replace this subscriber """
 wheel_drop_sub = rospy.Subscriber('airborne', Bool, flying_or_lost)
 pose_pub = rospy.Publisher('initialpose', PoseWithCovarianceStamped, queue_size=10)

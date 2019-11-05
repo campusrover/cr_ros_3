@@ -1,4 +1,5 @@
 <launch>
+  <node pkg="cr_ros_3" type="process_fid_transforms.py" name="process_fid_transforms" output="screen"></node>
   <!--  Run the throttled feed for the Aruco node-->
   <node pkg="topic_tools" type="throttle" name="cam_throttle" args="messages /raspicam_node/image/compressed 2" />
 

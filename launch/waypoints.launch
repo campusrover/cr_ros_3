@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="cr_ros_3" type="whereabouts.py" name="whereabouts" output="screen"></node>
+  <node pkg="cr_ros_3" type="narrate_location.py" name="narrate_location" output="screen"></node>
+</launch>

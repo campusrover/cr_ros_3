@@ -55,11 +55,21 @@ When adding a node, you will also need to add it to the appropriate launch file 
 
 ## State of the package report
 #### NOTE TO CONTRIBUTORS: please update this section after every sizable commit!
-11/4/19
+11/5/19
 * Haofan's Hand gesture node is AWOL. We've reached out to him to get the code, awaiting response
 * Facial recognition node also AWOl. 
 * Both facets above should be replaced, removed or redone. 
 * Some changes have been made regarding the Alexa/voice integration, but has not been tested
-* moving towards "modular launch files" paradigm, where nodes that depend on each other are grouped into launch files, and can be enabled/ disabled via the group tag
 * improving documentation of all nodes - each node should have a clear statement of purpose at the top. 
-* suggestion: perhaps some nodes should be renamed for the sake of clarity? ex. lost_and_found is not a good file name
+* launch files now have greater modularity. related nodes have been grouped into launch files. 
+* some files have been renamed for clarity. these include: 
+    * `detect_pickup.py` --> `pickup_detector.py`
+    * `lost_and_found.py` --> `pickup_recovery.py` These two nodes are connected, so their names now reflect that. 
+    * `message_switch.py` --> `talk_queue.py` "message switch" was ambiguous. didn't really tell you what the node did. "talk queue" perfectly captures the function: it is a queue for the talk service. 
+    * `delivery.py` --> `voice_delivery.py`
+
+Things that should/need to be done:
+* nodes that currently directly interface talk_srv should publish to /things_to_say instead, let talk_queue handle talk service interface
+* hand gesture + facial recognition need to be tracked down and added
+* continue improving documentation
+* finalize launch modularity - what should go where?

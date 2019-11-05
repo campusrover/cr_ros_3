@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# description: listens to the /things_to_say topic, holds them in a queue, and sends them # TODO:
+# description: listens to the /things_to_say topic, holds them in a queue, and sends them to
 # the service server in talk.py
 # should probably have a better, more descrptive name than message switch
 
@@ -15,7 +15,7 @@ def callback(msg):
     global say_queue
     say_queue[msg.say_at] = msg.to_say
 
-rospy.init_node('message_switch')
+rospy.init_node('talk_queue')
 sub = rospy.Subscriber('/things_to_say', ThingsToSay, callback)
 talk_srv = rospy.ServiceProxy('say', Talk)
 
