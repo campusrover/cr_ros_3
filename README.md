@@ -52,6 +52,20 @@ When adding a node, you will also need to add it to the appropriate launch file 
 * ONBOARD nodes should be lightweight and/or have some sort of hardware requirement associated with it - for instance, if the node publishes pictures directly from the camera, then it should be running onboard. 
 * OFFBOARD nodes can be all other nodes. Remember, ROS is distributed - if this package ever becomes too computationally intense, the offboard components can be distributed amongst many launch files, each one running on a different remote PC. (e.g. there should probably only be one CV/ML node per remote PC...)
 
+## Facial recognition
+Two different attempts have been made at facial recognition so far. 
+
+#### Gen 2
+see `greet.py`
+
+#### Gen 3
+there is another repositiory in the campusrover group called [Robotic Computer Vision](https://github.com/campusrover/Robotics_Computer_Vision)
+running the `detect.py` script in that package will begin publishing facial recognition information. **NB** `detect.py` is not a ROS node but it will publish a ROS topic. Therefore you can run `detect.py` in the terminal by using `python`, not `rosrun` 
+`detect.py` communicates with `go_to_person.py` in cr_ros_3. 
+`detect.py` requires a discrete GPU, and should probably not be run alongside other nodes on the same remote PC. 
+
+## Hand gestures
+*We are currently in process of retrieving the gen 3 source code for hand gesture publishing from it's author*
 
 ## State of the package report
 #### NOTE TO CONTRIBUTORS: please update this section after every sizable commit!
