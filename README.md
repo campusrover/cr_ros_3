@@ -28,7 +28,7 @@ roslaunch cr_ros_3 mutant_offboard_rpicam.launch fids:=FALSE
 It is highly suggested that you set up aliases for both of these commands on your robot and your remote pc. 
 
 ## How to add a new node
-If you are adding a node that will affect the robot's behavior, then it should this package's state manager
+If you are adding a node that will affect the robot's behavior, then it use should this package's state manager
 
 Currently, there are 7 states:
 * Waiting - the campus rover knows it's location and has no current objective. It is motionless. 
