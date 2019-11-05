@@ -51,3 +51,15 @@ examples:
 When adding a node, you will also need to add it to the appropriate launch file - either onboard or offboard. 
 * ONBOARD nodes should be lightweight and/or have some sort of hardware requirement associated with it - for instance, if the node publishes pictures directly from the camera, then it should be running onboard. 
 * OFFBOARD nodes can be all other nodes. Remember, ROS is distributed - if this package ever becomes too computationally intense, the offboard components can be distributed amongst many launch files, each one running on a different remote PC. (e.g. there should probably only be one CV/ML node per remote PC...)
+
+
+## State of the package report
+#### NOTE TO CONTRIBUTORS: please update this section after every sizable commit!
+11/4/19
+* Haofan's Hand gesture node is AWOL. We've reached out to him to get the code, awaiting response
+* Facial recognition node also AWOl. 
+* Both facets above should be replaced, removed or redone. 
+* Some changes have been made regarding the Alexa/voice integration, but has not been tested
+* moving towards "modular launch files" paradigm, where nodes that depend on each other are grouped into launch files, and can be enabled/ disabled via the group tag
+* improving documentation of all nodes - each node should have a clear statement of purpose at the top. 
+* suggestion: perhaps some nodes should be renamed for the sake of clarity? ex. lost_and_found is not a good file name
