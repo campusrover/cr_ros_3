@@ -1,36 +1,5 @@
-<!--
-  KeyOp launcher
- -->
-
 <launch>
-  <!-- Load amcl map -->
-  <arg name="map_file" default="$(find cr_ros_2)/files/basement_map.yaml"/> <!-- _for_robot -->
-
-  <!-- bringup flask webpage -->
-  <include file="$(find cr_web)/launch/bringup.launch"/>
-  <!-- Start navigation -->
-  <include file="$(find cr_ros_2)/launch/mutant_navigation.launch">
-    <arg name="map_file" value="$(arg map_file)"/>
-    <arg name="scan_topic" value="scan_filter"/>
-    <arg name="open_rviz" value="true"/>
-    <arg name="move_forward_only" value="false"/>
-  </include>
-
-
-  <!-- Launch custom code -->
-  <node pkg="cr_ros_2" type="turtlebot_teleop_key.py" name="turtlebot_teleop_key" output="screen"></node>
-  <node pkg="cr_ros_2" type="message_switch.py" name="message_switch" output="screen"></node>
-  <!-- <node pkg="cr_ros_2" type="whereabouts.py" name="whereabouts" output="screen"></node> -->
-  <node pkg="cr_ros_2" type="lost_and_found.py" name="lost_and_found" output="screen"></node>
-  <node pkg="cr_ros_2" type="process_fid_transforms.py" name="process_fid_transforms" output="screen"></node>
-  <node pkg="cr_ros_2" type="hand_gesture.py" name="hand_gesture" output="screen"></node>
-  <node pkg="cr_ros_2" type="go_to_person.py" name="go_to_person" output="screen"></node>
-  <node pkg="cr_ros_2" type="voice_destination_pub.py" name="voice_destination_pub" output="screen"></node>
-  <!-- <node pkg="cr_ros_2" type="greet.py" name="greet" output="screen"></node> -->
-  <!-- <node pkg="cr_ros" type="package_sender.py" name="package_sender" output="screen"></node> -->
-  <!-- <node pkg="cr_ros" type="package_handler.py" name="package_handler" output="screen"></node> -->
-
-  <!--  Run the throttled feeds -->
+  <!--  Run the throttled feed for the Aruco node-->
   <node pkg="topic_tools" type="throttle" name="cam_throttle" args="messages /raspicam_node/image/compressed 2" />
 
   <!-- Run the aruco_detect node -->
@@ -65,6 +34,4 @@
   <node pkg="tf" type="static_transform_publisher" name="fid_125" args="17.031 20.10 0.84455 1.57079 3.14159 0 /map /fid_125 100" />  <!-- brick tower -->
   <node pkg="tf" type="static_transform_publisher" name="fid_160" args="19.796 23.505 0.79057 3.14159 3.14159 0 /map /fid_160 100" />  <!-- pitos office -->
   <!-- <node pkg="tf" type="static_transform_publisher" name="map_to_base" args="0.0 0.0 0.10 0 0 0.0 /map /base_footprint 1000"/> -->
-
-
 </launch>

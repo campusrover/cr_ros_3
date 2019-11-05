@@ -21,40 +21,7 @@ rospy.init_node("pickup_detector")
 imu_sub = rospy.Subscriber("imu", Imu, imu_cb)
 airborne_pub = rospy.Publisher('airborne', Bool, queue_size=1) # true if roboot is in air, false if not
 min_acc_z = 100  # start min high initially
-""" removed "calibration" in favor of hard-coded thresholds
-# gloabl variables for acceleration in the z direction
-global min_acc_z
-global max_acc_z
-global avg_acc_z  # average is admittedly not used, but it might be nice to have around.
 
-z_acceleration = 69  # this seems to be the ballpark that the IMU normally reads
-
-max_acc_z = 0
-avg_acc_z = 0
-samples = 0
-
-time.sleep(4)  # wait for imu to begin publishing - wait time is an estimate, and not consistant
-start_time = rospy.Time.now()
-print("[PICKUP DETECTOR]: Do not move robot! calibrating pickup")
-# spend 7 seconds to generate an idea of the normal range of values the IMU reads for z acceleration (it's not constant)
-while rospy.Time.now() < start_time + rospy.Duration(4):
-    print('curr z acc: ', z_acceleration)
-    if not z_acceleration == 69:
-        curr_z = z_acceleration
-    #print(curr_z, rospy.Time.now() - start_time)
-        if curr_z < min_acc_z:
-            min_acc_z = curr_z
-        if curr_z > max_acc_z:
-            max_acc_z = curr_z
-        if not avg_acc_z == 0:
-            avg_acc_z = (avg_acc_z * samples + curr_z)/(samples + 1)
-            samples += 1
-        else:
-            avg_acc_z = curr_z
-
-diff = (avg_acc_z - min_acc_z)*1.5 # increases the dead zone range
-print("[PICKUP DETECTOR]: finished calibration: min: {}, avg: {} max: {} diff{}".format(min_acc_z, avg_acc_z, max_acc_z, diff))
-"""
 rate = rospy.Rate(10)
 airborne_pub.publish(False) # initially on the ground
 flying = False

@@ -17,12 +17,12 @@
   </node>
 
   <!-- Launch custom code -->
-  <node pkg="cr_ros_2" type="talk.py" name="talk" output="screen"></node>
-  <node pkg="cr_ros_2" type="scan_filter.py" name="scan_filter" output="screen"></node>
-  <node pkg="cr_ros_2" type="cpu_checker.py" name="cpu_checker" output="screen"></node>
-  <node pkg="cr_ros_2" type="detect_pickup.py" name="pickup_checker" output="screen"></node>
-  <node pkg="cr_ros_2" type="rover_controller.py" name="rover_controller" output="screen"></node>
-  <node pkg="cr_ros_2" type="state.py" name="state" output="screen"></node>
+  <node pkg="cr_ros_3" type="talk.py" name="talk" output="screen"></node>
+  <node pkg="cr_ros_3" type="scan_filter.py" name="scan_filter" output="screen"></node>
+  <node pkg="cr_ros_3" type="cpu_checker.py" name="cpu_checker" output="screen"></node>
+  <node pkg="cr_ros_3" type="detect_pickup.py" name="pickup_checker" output="screen"></node>
+  <node pkg="cr_ros_3" type="rover_controller.py" name="rover_controller" output="screen"></node>
+  <node pkg="cr_ros_3" type="state.py" name="state" output="screen"></node>
   <!-- <node pkg="cr_ros" type="recording_sender.py" name="recording_sender" output="screen"></node> -->
 
 </launch>

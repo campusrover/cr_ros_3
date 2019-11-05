@@ -3,6 +3,7 @@
 # new to cr_ros_2:
 # namespacing
 # removed TB@ docking junk
+# this node handles communication between campus rover and flask web app
 
 import rospy
 import os

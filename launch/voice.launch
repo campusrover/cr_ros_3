@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="cr_ros_3" type="delivery.py" name="delivery" output="screen"></node>
+  <node pkg="cr_ros_3" type="voice_move_base.py" name="voice_move_base" output="screen"></node>
+  <node pkg="cr_ros_3" type="voice_destination_pub.py" name="voice_destination_pub" output="screen"></node>
+</launch>

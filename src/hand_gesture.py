@@ -1,4 +1,11 @@
 #!/usr/bin/env python
+
+"""
+This node was added as a part of the spring 2019 (#gen3) final demo. 
+It is not a full-feature node. 
+The purpose of this node is if it recieves a hand gesture after a certain amount of time has passed since the last gesture, then it suspends navigation for a few seconds, then resumes. 
+
+"""
 import rospy
 from all_states import *
 import actionlib

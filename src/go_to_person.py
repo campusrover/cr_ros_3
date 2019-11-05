@@ -1,4 +1,11 @@
 #!/usr/bin/env python
+
+"""
+This node was added as part of the spring 2019 (#gen3) demo
+It is not a full feature node. 
+the purpose is to use information from a facial recognition node to find and identify a person, and deliver their package to them. 
+It was hastily implemented and not successful in demo. 
+"""
 import rospy
 from all_states import *
 import actionlib
