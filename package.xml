@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>cr_ros_2</name>
+  <name>cr_ros_3</name>
   <version>0.0.0</version>
-  <description>The cr_ros_2 package</description>
+  <description>The cr_ros_3 package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
