@@ -27,6 +27,7 @@ airborne_pub.publish(False) # initially on the ground
 flying = False
 # continue reading data, print direction that the robot thinks it is going
 start_time = None
+z_acceleration = 9.8
 # important note: z_acceleration picks up acceleration due to gravity (~9.8) normally. acceleration > ~9.8 mean the robot is falling faster than gravity.
 # acceleration < 9.8 means the robot is either slowing it's fall - or accelerating upwards
 while not rospy.is_shutdown():
