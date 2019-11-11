@@ -14,7 +14,7 @@ from geometry_msgs.msg import Pose, Point
 from cr_ros_3.srv import *
 
 __change_state = rospy.ServiceProxy('state_change', StateChange)
-
+__state_query = rospy.ServiceProxy('state_query', StateQuery)
 
 class States(Enum):
 
@@ -32,6 +32,10 @@ class States(Enum):
     DUMMY_POSE = Pose(position=Point(z=1))
     DUMMY_STRING = 'n0th1ng_t0_s4y'
 
+
+def get_state():
+    return States[__state_query().state_name]
+    #return current_state
 
 def change_state(new_state,
                 to_say=States.DUMMY_STRING.value,
@@ -85,12 +89,3 @@ legal_state_changes = {
         # States.CLEARING_COSTMAP: [States.NAVIGATING, States.TELEOP],
         # States.DONE_NAVIGATING: [States.WAITING],
     }
-
-def state_cb(msg):
-    global current_state
-    current_state = States[msg.data]
-
-def get_state():
-    return current_state
-
-state_sub = rospy.Subscriber('state', String, state_cb)
