@@ -4,7 +4,7 @@
 
 import rospy
 from std_msgs.msg import String
-from cr_ros_2.srv import Talk, TalkResponse
+from cr_ros_3.srv import Talk, TalkResponse
 import pyttsx   # python text to speech (offline)
 #import sounddevice as sd
 #from scipy.io.wavfile import read

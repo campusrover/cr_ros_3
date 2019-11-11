@@ -20,8 +20,9 @@ from geometry_msgs.msg import Twist, Pose, Point, \
     Quaternion, PoseStamped, Transform, Vector3, TransformStamped
 from nav_msgs.msg import OccupancyGrid
 from move_base_msgs.msg import MoveBaseGoal, MoveBaseAction
-from cr_ros_2.srv import Talk
+from cr_ros_3.srv import Talk
 from all_states import *
+from state_tools import *
 
 FEEDBACK_STATUS = {
     "0":'PENDING', "1":'ACTIVE', "2":'PREEMPTED',
@@ -45,7 +46,7 @@ def nav_cb(feedback):
 last_im_pub = None
 
 def done_cb(goal_status, done_result):
-    change_state(States.WAITING)
+    demand_state_change('waiting') #change_state(States.WAITING)
     nav_status = "Navigation {}".format(FEEDBACK_STATUS[str(goal_status)])
     rospy.loginfo(nav_status)
     if goal_status == 3:
@@ -76,7 +77,7 @@ def destination_cb(msg): # input PoseStamped
     goal = MoveBaseGoal(goal_pose)
     move_client.send_goal(goal, feedback_cb=nav_cb, done_cb=done_cb)
     rospy.loginfo("Goal sent to move base navigator")
-    change_state(States.NAVIGATING)
+    demand_state_change('navigating') #change_state(States.NAVIGATING)
 
 
 def web_destination_cb(msg): # input json

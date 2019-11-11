@@ -8,14 +8,15 @@ import rospy
 import copy
 import numpy as np
 import math
-from cr_ros_2.srv import Talk
+from cr_ros_3.srv import Talk
 import actionlib
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from std_msgs.msg import Header, String, Bool
-from cr_ros_2.msg import ThingsToSay
+from cr_ros_3.msg import ThingsToSay
 #from kobuki_msgs.msg import WheelDropEvent
 from geometry_msgs.msg import Twist, Vector3, Point, Pose, PoseStamped, PoseWithCovariance, PoseWithCovarianceStamped, Quaternion
 from all_states import *
+from state_tools import *
 
 # edited callback to work with new pickup detector node
 def flying_or_lost(msg):
@@ -23,17 +24,16 @@ def flying_or_lost(msg):
 
     # see if airborne
     if msg.data == True:
-        if get_state() == States.NAVIGATING:
+        if current_state_is('navigating'):  # example of new state tools: more easily readable - code inside if statement executes only in one state
             lock_current_goal = True
             move_client.cancel_all_goals()
-        if get_state() != States.FLYING:
-            change_state(States.FLYING)
+        if demand_state_change('flying'):  # exmple of new state tools: forces a state change, then executes code within if statement if state change was successful
             talk_srv("I'm flying!")
             flying = True
     # Else, if robot thinks it is on the ground
     else:
-        if get_state() == States.FLYING:
-            change_state(States.LOST)
+        if current_state_is('flying'):
+            demand_state_change('lost')
             not_lost_anymore = False
             flying = False
 
@@ -75,7 +75,7 @@ def save_goal(msg):
         current_goal = msg
 
 def is_lost():
-    return get_state() == States.LOST
+    return current_state_is('lost')
 
 def publish_for_second(twist):
     start_time = rospy.Time.now().to_sec()

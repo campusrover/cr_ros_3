@@ -8,7 +8,7 @@ import os
 from std_msgs.msg import String
 from sensor_msgs.msg import CompressedImage
 from cv_bridge import CvBridge, CvBridgeError
-from cr_ros.srv import Talk
+from cr_ros_3.srv import Talk
 
 IM_DIR = "/files/faces"
 PUBLISH_RATE = 5 # seconds

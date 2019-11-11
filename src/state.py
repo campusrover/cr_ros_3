@@ -14,7 +14,7 @@ from std_msgs.msg import Header, String
 from geometry_msgs.msg import PoseStamped, PoseWithCovariance, PoseWithCovarianceStamped
 
 from all_states import *
-from cr_ros_2.srv import *
+from cr_ros_3.srv import *
 
 def handle_state_change(req):
     global current_state

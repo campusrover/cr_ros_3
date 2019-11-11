@@ -14,7 +14,7 @@ from geometry_msgs.msg import Twist, Pose, Point, \
     Quaternion, PoseStamped, Transform, Vector3, TransformStamped
 from nav_msgs.msg import OccupancyGrid
 from move_base_msgs.msg import MoveBaseGoal, MoveBaseAction
-from cr_ros_2.srv import Talk
+from cr_ros_3.srv import Talk
 from all_states import *
 
 rospy.init_node('voice_destination_pub')

@@ -40,6 +40,7 @@ from std_msgs.msg import UInt8
 import sys, select, termios, tty, time
 
 from all_states import *
+from state_tools import *
 import actionlib
 from move_base_msgs.msg import MoveBaseAction
 
@@ -76,12 +77,11 @@ def vels(speed,turn):
 def teleop_state():
     global was_lost, got_pose_estimate
     cancel_goals()
-    prev_state = get_state()
-    if prev_state is States.LOST or prev_state is States.FLYING:
+    if current_state_is('lost') or current_state_is('flying'):
         was_lost = True
         got_pose_estimate = False
 
-    change_state(States.TELEOP)
+    demand_state_change('teleop') #change_state(States.TELEOP)
 
 def cancel_goals():
     prev_state = get_state()
@@ -107,11 +107,11 @@ def stop(control_speed, control_turn):
 
     pub.publish(Twist())
     if was_lost and not got_pose_estimate:
-        new_state = States.LOST
+        demand_state_change('lost') # new_state = States.LOST
     else:
-        new_state = States.WAITING
+        demand_state_change('waiting') #new_state = States.WAITING
 
-    change_state(new_state)
+    #change_state(new_state)
 
 def pose_cb(msg):
     global got_pose_estimate

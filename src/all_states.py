@@ -11,7 +11,7 @@ from enum import Enum
 import rospy
 from std_msgs.msg import String
 from geometry_msgs.msg import Pose, Point
-from cr_ros_2.srv import *
+from cr_ros_3.srv import *
 
 __change_state = rospy.ServiceProxy('state_change', StateChange)
 

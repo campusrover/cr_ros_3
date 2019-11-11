@@ -7,8 +7,8 @@
 import rospy
 from std_msgs.msg import String
 from rosgraph_msgs.msg import Log
-from cr_ros.srv import Talk
-from cr_ros.msg import ThingsToSay
+from cr_ros_3.srv import Talk
+from cr_ros_3.msg import ThingsToSay
 import time
 
 def callback(msg):

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import rospy
-from cr_ros.srv import Talk
+from cr_ros_3.srv import Talk
 from std_msgs.msg import Bool, String, Header
 from geometry_msgs.msg import Twist, PoseStamped, Pose
 from kobuki_msgs.msg import ButtonEvent, DigitalInputEvent
