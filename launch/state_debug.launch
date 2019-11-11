@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="cr_ros_3" type="state.py" name="state" output="screen"></node>
+    <node pkg="cr_ros_3" type="state_tool_test.py" name="tool_test" output="screen"></node>
+</launch>
