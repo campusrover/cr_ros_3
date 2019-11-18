@@ -35,11 +35,11 @@ while not rospy.is_shutdown():
     curr_z = z_acceleration
     if curr_z > 11: # 11 replaced max_acc_z + diff
         if flying:
-            print("down: ", curr_z)
+            rospy.loginfo("down: {}".format(curr_z))
         start_time = rospy.Time.now()  # reset start time
         #airborne_pub.publish(True)
     elif curr_z < 7.5:  # 7.5 replaced max_acc_z + diff
-        print("up: ", curr_z)
+        rospy.loginfo("up: {}".format(curr_z))
         if not start_time is None and not flying:
             flying = True
         start_time = rospy.Time.now()
