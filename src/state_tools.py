@@ -12,7 +12,6 @@ def current_state_is(state):
     Returns:
     Boolean
     """
-    #print('[INFO]: {}'.format(get_state()))
     return get_state() == States[state.upper()]        
 
 
@@ -38,14 +37,31 @@ def demand_state_change(new_state):
     """
     Tries to force robot into desired state. 
     Parameters: 
+    new_state: a string that could be a state if uppercased, representing desired state to transition to
+    cond: a boolean value, which if true will trigger transition from current state to new state. cond can also be a function that returns true/false, this fucntion will evaluate cond (as long as cond has no args)
     new_state: a string that matches a key in ez_states which represents the desired state to change to
     Returns:
-    Boolean: true id state change was successful, false if failure. 
+    Boolean: true if state change was successful, false if failure. 
     """
     if not current_state_is(new_state):
         return change_state(States[new_state.upper()]) 
     else:
         return False
+
+def conditional_demand_state_change(new_state, cond):
+    """
+    Will only demand a state change if a condition is met, regardless of the current state
+    Parameters:
+    Returns:
+    Boolean: true if state change was successful, false if failure. 
+    """
+    if callable(cond):
+        cond = cond()
+    if cond:
+        return demand_state_change(new_state)
+    else:
+        return False
+
 
 def debug_check_state():
     return get_state()

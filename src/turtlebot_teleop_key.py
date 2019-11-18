@@ -119,7 +119,7 @@ def pose_cb(msg):
 
 rospy.init_node('turtlebot_teleop')
 pub = rospy.Publisher('cmd_vel', Twist, queue_size=5)
-sub = rospy.Subscriber('web/teleop', UInt8, setKeyCb)
+sub = rospy.Subscriber('teleop_keypress', UInt8, setKeyCb)
 pose_sub = rospy.Subscriber('initialpose', PoseWithCovarianceStamped, pose_cb)
 
 x = 0

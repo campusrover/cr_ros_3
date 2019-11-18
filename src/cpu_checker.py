@@ -11,7 +11,7 @@ from std_msgs.msg import Float32
 
 
 rospy.init_node('cpu_checker')
-cpu_pub = rospy.Publisher('sbc_cpu_usage', Float32, queue_size=1)
+cpu_pub = rospy.Publisher('laptop_cpu_usage', Float32, queue_size=1) # for compatibility with cr_web, eventhough mutant and alien don't have laptops
 
 rate = rospy.Rate(1)
 while not rospy.is_shutdown():
