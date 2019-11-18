@@ -28,7 +28,7 @@
 
 
   <!-- fiducials (Aruco + static fid transforms -->
-  <arg name="fids" default="true">
+  <arg name="fids" default="true"/>
   <group if="$(arg fids)">
    <include file="$(find cr_ros_3)/launch/fiducials.launch"/>
   </group>

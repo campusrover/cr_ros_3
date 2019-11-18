@@ -12,6 +12,7 @@ def current_state_is(state):
     Returns:
     Boolean
     """
+    #print('[INFO]: {}'.format(get_state()))
     return get_state() == States[state.upper()]        
 
 
@@ -45,3 +46,6 @@ def demand_state_change(new_state):
         return change_state(States[new_state.upper()]) 
     else:
         return False
+
+def debug_check_state():
+    return get_state()

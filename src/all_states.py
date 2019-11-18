@@ -34,7 +34,7 @@ class States(Enum):
 
 
 def get_state():
-    return States[__state_query().state_name]
+    return States[__state_query().state_name] # returns state in format States.STATE, where STATE is NAVIGATING, WAITING, etc...
     #return current_state
 
 def change_state(new_state,

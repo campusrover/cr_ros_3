@@ -24,6 +24,7 @@ def flying_or_lost(msg):
 
     # see if airborne
     if msg.data == True:
+        rospy.loginfo('{} transition to {}'.format(get_state(), States['FLYING']))
         if current_state_is('navigating'):  # example of new state tools: more easily readable - code inside if statement executes only in one state
             lock_current_goal = True
             move_client.cancel_all_goals()
