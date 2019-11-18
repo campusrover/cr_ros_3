@@ -19,12 +19,13 @@ def imu_cb(msg):
 
 rospy.init_node("pickup_detector")
 imu_sub = rospy.Subscriber("imu", Imu, imu_cb)
-airborne_pub = rospy.Publisher('airborne', Bool, queue_size=1) # true if roboot is in air, false if not
+airborne_pub = rospy.Publisher('airborne', Bool, queue_size=5) # true if roboot is in air, false if not
 min_acc_z = 100  # start min high initially
 
 rate = rospy.Rate(10)
 airborne_pub.publish(False) # initially on the ground
 flying = False
+prev_flying = False
 # continue reading data, print direction that the robot thinks it is going
 start_time = None
 z_acceleration = 9.8
@@ -53,5 +54,7 @@ while not rospy.is_shutdown():
             start_time = None
             if flying:
                 flying = False
-    airborne_pub.publish(flying)
+    if not prev_flying == flying:  # if the flying status has changed
+        airborne_pub.publish(flying)
+    prev_flying = flying
     rate.sleep()
