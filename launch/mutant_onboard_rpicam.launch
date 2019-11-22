@@ -3,7 +3,7 @@
  -->
 
 <launch>
-
+  <arg name="map_file" default="$(find cr_ros_3)/files/basement_map_gen4.yaml"/>
   <!-- Bringup bot -->
   <include file="$(find turtlebot3_bringup)/launch/turtlebot3_robot.launch"/>
 
@@ -21,6 +21,7 @@
   <node pkg="cr_ros_3" type="talk.py" name="talk" output="screen"></node>
   <node pkg="cr_ros_3" type="cpu_checker.py" name="cpu_checker" output="screen"></node>
   <!-- These nodes could run offboard -->
+  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
   <node pkg="cr_ros_3" type="scan_filter.py" name="scan_filter" output="screen"></node>
   <node pkg="cr_ros_3" type="pickup_detector.py" name="pickup_detector" output="screen"></node>
   <node pkg="cr_ros_3" type="rover_controller.py" name="rover_controller" output="screen"></node>

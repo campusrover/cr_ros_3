@@ -1,3 +1,5 @@
+### Branch note: this branch is being used to test some new state interface tools (see state_tools.py)
+
 # Welcome to the campus rover repository, version 3. This repo contains python code for the campus rover project
 
 to get started with this repo, you will need a few things installed on your laptop:

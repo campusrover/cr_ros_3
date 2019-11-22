@@ -4,7 +4,7 @@
 
 <launch>
   <!-- Load amcl map -->
-  <arg name="map_file" default="$(find cr_ros_3)/files/basement_map.yaml"/> <!-- _for_robot -->
+  <arg name="map_file" default="$(find cr_ros_3)/files/basement_map_gen4.yaml"/> <!-- _for_robot -->
 
   <!-- bringup flask webpage -->
   <include file="$(find cr_web)/launch/bringup.launch"/>

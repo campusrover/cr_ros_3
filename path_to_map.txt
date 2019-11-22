@@ -1,7 +1,7 @@
 $HOME/catkin_ws/src/cr_ros_2/files/basement_map.yaml
 
 
-roslaunch turtlebot3_navigation turtlebot3_navigation.launch map_file:=$HOME/catkin_ws/src/cr_ros_2/files/basement_map.yaml
+roslaunch turtlebot3_navigation turtlebot3_navigation.launch map_file:=$HOME/catkin_ws/src/cr_ros_2/files/basement_map_gen4.yaml
 
 roslaunch turtlebot3_navigation turtlebot3_navigation.launch map_file:=$HOME/catkin_ws/src/cr_ros_2/files/basement_map_for_robot.yaml
 
