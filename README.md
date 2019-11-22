@@ -72,21 +72,13 @@ running the `detect.py` script in that package will begin publishing facial reco
 
 ## State of the package report
 #### NOTE TO CONTRIBUTORS: please update this section after every sizable commit!
-11/5/19
+11/22/19
+* This pacakge is finally stable - if all dependencies are installed,both onboard and offboard launches will open without any killer errors. 
+* Some new functions that are intended to make interacting with the state manager easier have been added. see the state_tools.py file to see what is available. for instance, before state tools, getting a boolean to check if the current state was a specific state had to be expressed as: `get_state() == States.WAITING` (if the desired state was waiting). Now, the same can be acheived via `current_state_is('waiting')`. 
+* Background changes have been made to make the package compatible with cr_web
 * Haofan's Hand gesture node is AWOL. We've reached out to him to get the code, awaiting response
-* Facial recognition node also AWOl. 
-* Both facets above should be replaced, removed or redone. 
-* Some changes have been made regarding the Alexa/voice integration, but has not been tested
-* improving documentation of all nodes - each node should have a clear statement of purpose at the top. 
-* launch files now have greater modularity. related nodes have been grouped into launch files. 
-* some files have been renamed for clarity. these include: 
-    * `detect_pickup.py` --> `pickup_detector.py`
-    * `lost_and_found.py` --> `pickup_recovery.py` These two nodes are connected, so their names now reflect that. 
-    * `message_switch.py` --> `talk_queue.py` "message switch" was ambiguous. didn't really tell you what the node did. "talk queue" perfectly captures the function: it is a queue for the talk service. 
-    * `delivery.py` --> `voice_delivery.py`
+
 
 Things that should/need to be done:
 * nodes that currently directly interface talk_srv should publish to /things_to_say instead, let talk_queue handle talk service interface
-* hand gesture + facial recognition need to be tracked down and added
-* continue improving documentation
-* finalize launch modularity - what should go where?
+* continue improving documentation - especially with regards to the alexa voice integration (instructions for launch, setup, etc)
