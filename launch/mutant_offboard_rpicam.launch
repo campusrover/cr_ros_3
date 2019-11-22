@@ -3,6 +3,9 @@
  -->
 
 <launch>
+  <!-- reconfigure camera -->
+  <node pkg="cr_ros_3" type="camera_reconfigure.sh" name="camera_reconfigure" output="screen"/>
+  
   <!-- Load amcl map -->
   <arg name="map_file" default="$(find cr_ros_3)/files/basement_map_gen4.yaml"/> <!-- _for_robot -->
 
