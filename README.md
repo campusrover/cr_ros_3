@@ -1,4 +1,3 @@
-### Branch note: this branch is being used to test some new state interface tools (see state_tools.py)
 
 # Welcome to the campus rover repository, version 3. This repo contains python code for the campus rover project
 
@@ -53,6 +52,8 @@ examples:
 When adding a node, you will also need to add it to the appropriate launch file - either onboard or offboard. 
 * ONBOARD nodes should be lightweight and/or have some sort of hardware requirement associated with it - for instance, if the node publishes pictures directly from the camera, then it should be running onboard. 
 * OFFBOARD nodes can be all other nodes. Remember, ROS is distributed - if this package ever becomes too computationally intense, the offboard components can be distributed amongst many launch files, each one running on a different remote PC. (e.g. there should probably only be one CV/ML node per remote PC...)
+
+read [the state interface guide](HOW_TO_USE_STATE_INTERFACE.md) to learn the zen of interfacing with the state manager
 
 ## Facial recognition
 Two different attempts have been made at facial recognition so far. 
