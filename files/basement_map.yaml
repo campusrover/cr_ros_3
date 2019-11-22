@@ -1,4 +1,4 @@
-image: basement_map_gen4.png
+image: /home/nate/catkin_ws/src/cr_ros_3/files/basement_map_gen4.png
 resolution: 0.01
 origin: [0, 0, 0.000000] #Origin must be [0, 0, 0.000000] for web app, Ari!
 negate: 0

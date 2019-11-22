@@ -30,8 +30,10 @@
   </include>
 
   <!-- Open rviz -->
+  <!-- args="-d $(find turtlebot3_navigation)/rviz/turtlebot3_navigation.rviz"/> -->
   <group if="$(arg open_rviz)">
     <node pkg="rviz" type="rviz" name="rviz" required="true"
-          args="-d $(find cr_ros_3)/rviz_settings.rviz"/>
+          
+          args="-d $(find cr_ros_3)/clean_settings.rviz"/>
   </group>
 </launch>
