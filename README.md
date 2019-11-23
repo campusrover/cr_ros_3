@@ -75,10 +75,11 @@ running the `detect.py` script in that package will begin publishing facial reco
 11/22/19
 * This pacakge is finally stable - if all dependencies are installed,both onboard and offboard launches will open without any killer errors. 
 * Some new functions that are intended to make interacting with the state manager easier have been added. see the state_tools.py file to see what is available. for instance, before state tools, getting a boolean to check if the current state was a specific state had to be expressed as: `get_state() == States.WAITING` (if the desired state was waiting). Now, the same can be acheived via `current_state_is('waiting')`. 
-* Background changes have been made to make the package compatible with cr_web
+* Background changes have been made to make the package more compatible with cr_web
 * Haofan's Hand gesture node is AWOL. We've reached out to him to get the code, awaiting response
 
 
 Things that should/need to be done:
 * nodes that currently directly interface talk_srv should publish to /things_to_say instead, let talk_queue handle talk service interface
 * continue improving documentation - especially with regards to the alexa voice integration (instructions for launch, setup, etc)
+* add install scripts to automatically install all dependancies on both robot and remote pc
