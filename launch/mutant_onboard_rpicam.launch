@@ -22,7 +22,6 @@
   <!-- These nodes could run offboard -->
   <node pkg="cr_ros_3" type="scan_filter.py" name="scan_filter" output="screen"></node>
   <node pkg="cr_ros_3" type="pickup_detector.py" name="pickup_detector" output="screen"></node>
-  <node pkg="cr_ros_3" type="rover_controller.py" name="rover_controller" output="screen"></node>
   <node pkg="cr_ros_3" type="state.py" name="state" output="screen"></node>
 
 </launch>

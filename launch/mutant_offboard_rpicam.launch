@@ -28,6 +28,7 @@
   <node pkg="cr_ros_3" type="hand_gesture.py" name="hand_gesture" output="screen"></node>
   <node pkg="cr_ros_3" type="go_to_person.py" name="go_to_person" output="screen"></node>
   <node pkg="cr_ros_3" type="voice_destination_pub.py" name="voice_destination_pub" output="screen"></node>
+  <node pkg="cr_ros_3" type="rover_controller.py" name="rover_controller" output="screen"></node>
 
 
   <!-- fiducials (Aruco + static fid transforms -->
