@@ -2,7 +2,8 @@
 
 import rospy
 from all_states import *
-
+import time
+from cr_ros_3.msg import ThingsToSay
 
 def current_state_is(state):
     """
@@ -62,6 +63,15 @@ def conditional_demand_state_change(new_state, cond):
     else:
         return False
 
+
+def talker(string_to_say, things_to_say_publisher):
+    """
+    Sends a string to the talk queue for the talk service to say out loud
+    """
+    things_to_say_publisher.publish(ThingsToSay(
+        say_at=time.time(),
+        to_say=string_to_say
+    ))
 
 def debug_check_state():
     return get_state()

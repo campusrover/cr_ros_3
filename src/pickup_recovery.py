@@ -17,6 +17,7 @@ from cr_ros_3.msg import ThingsToSay
 from geometry_msgs.msg import Twist, Vector3, Point, Pose, PoseStamped, PoseWithCovariance, PoseWithCovarianceStamped, Quaternion
 from all_states import *
 from state_tools import *
+import time
 
 # edited callback to work with new pickup detector node
 def flying_or_lost(msg):
@@ -28,7 +29,7 @@ def flying_or_lost(msg):
             lock_current_goal = True
             move_client.cancel_all_goals()
         if demand_state_change('flying'):  # exmple of new state tools: forces a state change, then executes code within if statement if state change was successful
-            talk_srv("I'm flying!")
+            talker("i'm flying!", talker_pub)
             flying = True
     # Else, if robot thinks it is on the ground
     else:
@@ -90,7 +91,7 @@ pose_pub = rospy.Publisher('initialpose', PoseWithCovarianceStamped, queue_size=
 spin_pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
 dest_pub = rospy.Publisher('destination', PoseStamped, queue_size=1)
 goal_sub = rospy.Subscriber('destination', PoseStamped, save_goal)
-talk_srv = rospy.ServiceProxy('say', Talk)
+talker_pub = rospy.Publisher('/things_to_say', ThingsToSay, queue_size=1)
 
 rate = rospy.Rate(10)
 
@@ -124,7 +125,7 @@ while not rospy.is_shutdown():
 
         if not not_lost_anymore: # If we just localized, reset variables for the next time we're lost
             rospy.loginfo("Pose found while scanning")
-            talk_srv("I'm not lost anymore")
+            talker("I'm not lost anymore", talker_pub)
             reset_vars()
 
         rate.sleep()
@@ -135,7 +136,7 @@ while not rospy.is_shutdown():
         publish_pose(initial_pose)
 
     rospy.loginfo("Scanning for fiducial")
-    talk_srv("Scanning for fiducials")
+    talker("Scanning for fiducials", talker_pub)
     for i in range(0, 8): # Wait for a second, then spin 1/8 of a circle, 8 times
         publish_for_second(Twist())
         publish_for_second(Twist(angular=Vector3(z=math.pi*0.25)))

@@ -21,6 +21,8 @@ from geometry_msgs.msg import Twist, Pose, Point, \
 from nav_msgs.msg import OccupancyGrid
 from move_base_msgs.msg import MoveBaseGoal, MoveBaseAction
 from cr_ros_3.srv import Talk
+from std_srvs.srv import Empty
+from cr_ros_3.msg import ThingsToSay
 from all_states import *
 from state_tools import *
 
@@ -46,13 +48,20 @@ def nav_cb(feedback):
 last_im_pub = None
 
 def done_cb(goal_status, done_result):
+    global goal
     demand_state_change('waiting') #change_state(States.WAITING)
     nav_status = "Navigation {}".format(FEEDBACK_STATUS[str(goal_status)])
     rospy.loginfo(nav_status)
     if goal_status == 3:
-        say(nav_status)
+        talker(nav_status, talker_pub)
     elif goal_status == 4:
-        say('Give me a minute, I\'m feeling a little tired')
+        talker("Give me a minute, I'm feeling a little tired", talker_pub)
+        #NOTE: added functionality that clears costmap and re-sends goal
+        costmap_clearer()
+        move_client.send_goal(goal, feedback_cb=nav_cb, done_cb=done_cb)
+        rospy.loginfo("Goal re-sent to move base navigator")
+        demand_state_change('navigating')
+
 
 def teleop_cb(msg):
     teleop_pub.publish(msg)
@@ -64,7 +73,7 @@ def is_dock_pose(msg):
         return False
 
 def destination_cb(msg): # input PoseStamped
-    global nav_controller
+    global goal
 
     ## a failed attempt to pass the dock pose and tranform desired drive pose from that. Not used.
     # if is_dock_pose(msg):
@@ -98,7 +107,7 @@ def web_destination_cb(msg): # input json
 rospy.init_node('rover_controller')
 temp_pose_pub = rospy.Publisher('temp_pose',PoseStamped,queue_size=1)
 
-
+goal = None
 # web topics
 web_teleop_sub = rospy.Subscriber('web/teleop', UInt8, teleop_cb)
 web_destination_sub = rospy.Subscriber('web/destination', String, web_destination_cb)
@@ -112,9 +121,10 @@ image_sub =  rospy.Subscriber('raspicam_node/image/compressed', CompressedImage,
 
 # publishers
 teleop_pub = rospy.Publisher('teleop_keypress', UInt8, queue_size=100)
-say = rospy.ServiceProxy('say', Talk)
+talker_pub = rospy.Publisher('/things_to_say', ThingsToSay, queue_size=1)
 
-
+#service proxys
+costmap_clearer = rospy.ServiceProxy('/move_base/clear_costmaps', Empty)
 
 
 move_client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
