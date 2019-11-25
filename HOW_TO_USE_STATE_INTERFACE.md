@@ -15,3 +15,25 @@ there are 3 key files to the state manager - `all_states.py`, `state.py`, and `s
 Let's assume you've built some ros node (or collection of nodes) that publishes a useful topic. Now, you're going to make an *intermediary node* that uses that useful topic to interact with the state manager. 
 
 Here's an __example__: you've made a node that uses gesture recognition to recognize a finger pointing and waving in a circle. Your node publishes a topic `/finger_spin`. You want this gesture to translate to the behavior of the campus rover turning around 180 degrees. Your intermediatry node will subscribe to `/finger_spin`. The "turning around" behavior will be handled by orderring the campus rover to navigate to a pose slightly behind where it currently is and facing in the opposite direction. Your intermediary node might simply be a callback - where `if conditional_state_change('waiting', 'navigating', msg.data): turn_pub.publish(turn_pose)` (assuming turn_pose has already been calculated, and you only want this behavior to happen from the waiting state). As you see interacting with the state manager 
+
+
+## Talking
+`state_tools` provides the function `talker` which is intended to easily help you cause your note to invoke speech from the robot. 
+
+### Setup
+First, include the `ThingsToSay` message
+```
+from cr_ros_3.msg import ThingsToSay
+```
+*NB* : we are assuming you are also importing everything from `state_tools` already
+Then, set up a publisher
+```
+talker_pub = rospy.Publisher('/things_to_say', ThingsToSay, queue_size=1)
+```
+Whenever you would like to invoke speech, use a line like this:
+```
+talker('hello', talker_pub)
+```
+*NB* : the above line will cause the robot to say "Hello"
+
+*NB* : talking requires that both `talk.py` and `talk_queue.py` are active nodes *Why?* : `talk` is the actual service which process text to speech, `talk_queue` manages multiple incoming things to say
