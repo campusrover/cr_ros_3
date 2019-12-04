@@ -7,7 +7,7 @@
 import rospy
 from std_msgs.msg import String
 from cr_ros_3.msg import ThingsToSay
-from all_states import get_state
+from all_states import *
 import time
 
 def update_location(msg):
