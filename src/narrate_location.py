@@ -25,7 +25,7 @@ rospy.init_node('location_narration')
 while not rospy.is_shutdown():
     if location is None or location == prev_location: 
         continue
-    doing = get_state().data.replace('_', ' ').lower()
+    doing = get_state().replace('_', ' ').lower()
     rospy.loginfo('Robot is {0} near {1}'.format(doing, location))
     talker_pub.publish(ThingsToSay(
         say_at=time.time(),
