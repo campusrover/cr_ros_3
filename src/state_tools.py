@@ -13,7 +13,7 @@ def current_state_is(state):
     Returns:
     Boolean
     """
-    return get_state() == States[state.upper()]        
+    return get_state() == States[state.upper()]   
 
 
 def conditional_change_state(current_state, new_state, cond=True):

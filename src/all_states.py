@@ -34,14 +34,22 @@ class States(Enum):
 
 
 def get_state():
-    return States[__state_query().state_name] # returns state in format States.STATE, where STATE is NAVIGATING, WAITING, etc...
+    try: 
+        return States[__state_query().state_name] # returns state in format States.STATE, where STATE is NAVIGATING, WAITING, etc...
+    except rospy.ServiceException:
+        rospy.logerr('Error: state query service unavailable')
+        return None
     #return current_state
 
 def change_state(new_state,
                 to_say=States.DUMMY_STRING.value,
                 pose_to_pub=States.DUMMY_POSE.value):
     req = StateChangeRequest(new_state.value, to_say, pose_to_pub)
-    return __change_state(req)
+    try:
+        return __change_state(req)
+    except rospy.ServiceException:
+        rospy.logerr('Error: state change service unavailable')
+        return False
 
 legal_state_changes = {
         States.WAITING: [
