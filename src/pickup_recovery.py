@@ -126,6 +126,7 @@ while not rospy.is_shutdown():
         if not not_lost_anymore: # If we just localized, reset variables for the next time we're lost
             rospy.loginfo("Pose found while scanning")
             talker("I'm not lost anymore", talker_pub)
+            spin_pub.publish(Twist())
             reset_vars()
 
         rate.sleep()

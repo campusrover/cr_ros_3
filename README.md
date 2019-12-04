@@ -1,6 +1,8 @@
 
 # Welcome to the campus rover repository, version 3. This repo contains python code for the campus rover project
 
+## [Please Familiarize Yourself with the ARL Notebook, it is a Useful Resource](https://campus-rover.gitbook.io/lab-notebook/)
+
 to get started with this repo, you will need a few things installed on your laptop:
 * the fiducials package, which contains `aruco_detect`. It can be [cloned from github](https://github.com/UbiquityRobotics/fiducials) or installed with apt-get (command is in the lab notebook)
 * flask python module - google how to install it with pip
