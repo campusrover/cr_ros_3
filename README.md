@@ -3,7 +3,7 @@
 
 to get started with this repo, you will need a few things installed on your laptop:
 * the fiducials package, which contains `aruco_detect`. It can be [cloned from github](https://github.com/UbiquityRobotics/fiducials) or installed with apt-get (command is in the lab notebook)
-* flask python module - google how to install it with pip
+* flask python module - see instructions in cr_web README.md
 * google chrome - there are plenty of tutorials on the internet which will guide you through installing chrome on ubuntu. If you really prefer firefox or some other browser, then **A**: what is wrong with you? and **B**: you will have to edit a shell script in cr_web. speaking of that...
 * [the cr_web package](https://github.com/campusrover/cr_web/tree/mutant)
 * it is entirely possible that there are other dependencies that aren't listed. use this package at your own risk!
