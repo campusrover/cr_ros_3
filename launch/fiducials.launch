@@ -25,14 +25,17 @@
 
   <!-- Publish static tfs for fiducials -->
   <!-- Aruco tags anchor to the center of the tag!!!!!-->
-  <node pkg="tf" type="static_transform_publisher" name="camera_rotater" args="0 0 0 -0.09 -1.1472049 0 /fiducial_camera /rotated_fiducial_camera 100" />
-  <node pkg="tf" type="static_transform_publisher" name="camera_to_base" args="0 0 0.53 0 0 0 /rotated_fiducial_camera /fiducial_base 100" />
-  <node pkg="tf" type="static_transform_publisher" name="fid_120" args="16.90 28.56 0.8636 4.71238 3.14159 0 /map /fid_120 100" /> <!-- inside jordan's office -->
-  <node pkg="tf" type="static_transform_publisher" name="fid_141" args="10.8 25.635 0.7493 0 3.14159 0 /map /fid_141 100" /> <!-- wall outside tim's office -->
-  <node pkg="tf" type="static_transform_publisher" name="fid_153" args="19.6 21.8 0.825 0 3.14159 0 /map /fid_153 100" /> <!-- charging dock -->
+  <node pkg="tf" type="static_transform_publisher" name="camera_rotater" args="0 0 0 -1.48079 3.14159 0 /fiducial_camera /rotated_fiducial_camera 100" />
+  <node pkg="tf" type="static_transform_publisher" name="camera_to_base" args="-0.255 0.13 0.63 0 0 0 /rotated_fiducial_camera /fiducial_base 100" />
+  <node pkg="tf" type="static_transform_publisher" name="fid_120" args="16.90 28.56 0.8636 3.14159 3.14159 0 /map /fid_120 100" /> <!-- inside jordan's office -->
+  <node pkg="tf" type="static_transform_publisher" name="fid_141" args="10.8 25.635 0.7493 4.71238 3.14159 0 /map /fid_141 100" /> <!-- wall outside tim's office -->
+  <node pkg="tf" type="static_transform_publisher" name="fid_153" args="19.6 21.8 0.825 4.71238 3.14159 0 /map /fid_153 100" /> <!-- charging dock -->
   <node pkg="tf" type="static_transform_publisher" name="fid_104" args="16.123 24.915 0.8121 1.57079 3.14159 0 /map /fid_104 100" />  <!-- trash can -->
-  <node pkg="tf" type="static_transform_publisher" name="fid_156" args="13.46 28.56 0.75406 4.71238 3.14159 0 /map /fid_156 100" /> <!-- Tim's office -->
+  <node pkg="tf" type="static_transform_publisher" name="fid_156" args="13.46 28.56 0.75406 3.14159 3.14159 0 /map /fid_156 100" /> <!-- Tim's office -->
   <node pkg="tf" type="static_transform_publisher" name="fid_125" args="17.031 20.10 0.84455 1.57079 3.14159 0 /map /fid_125 100" />  <!-- brick tower -->
-  <node pkg="tf" type="static_transform_publisher" name="fid_160" args="19.796 23.505 0.79057 3.14159 3.14159 0 /map /fid_160 100" />  <!-- pitos office -->
+  <node pkg="tf" type="static_transform_publisher" name="fid_160" args="19.6 23.505 0.79057 1.57079 3.14159 0 /map /fid_160 100" />  <!-- pitos office -->
   <!-- <node pkg="tf" type="static_transform_publisher" name="map_to_base" args="0.0 0.0 0.10 0 0 0.0 /map /base_footprint 1000"/> -->
 </launch>
+
+
+<!-- SPECIAL CAMERA OFFSET = -0.09        -->
