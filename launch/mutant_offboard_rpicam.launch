@@ -43,5 +43,8 @@
    <include file="$(find cr_ros_3)/launch/voice.launch"/>
   </group>
   <!-- NOTE: this 4-line block above can be used to modularly build a luanch file, with chunks of connected nodes that can be toggled on and off together-->
-
+  <arg name="waypoints" default="true"/>
+  <group if="$(arg waypoints)">
+   <include file="$(find cr_ros_3)/launch/waypoints.launch"/>
+  </group>
 </launch>

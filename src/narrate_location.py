@@ -18,14 +18,17 @@ loc_sub = rospy.Subscriber('/nearest_waypoint', String, update_location)
 talker_pub = rospy.Publisher('/things_to_say', ThingsToSay, queue_size=1)
 
 location = None
+prev_location = None
 
 rospy.init_node('location_narration')
 
 while not rospy.is_shutdown():
-    if location is None: continue
+    if location is None or location == prev_location: 
+        continue
     doing = get_state().data.replace('_', ' ').lower()
     rospy.loginfo('Robot is {0} near {1}'.format(doing, location))
     talker_pub.publish(ThingsToSay(
         say_at=time.time(),
         to_say='I am {0} near {1}'.format(doing, location)
     ))
+    prev_location = location
