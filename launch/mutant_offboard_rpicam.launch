@@ -11,6 +11,7 @@
 
   <!-- bringup flask webpage -->
   <include file="$(find cr_web)/launch/bringup.launch"/>
+  
   <!-- launch custom navigation package-->
   <include file="$(find cr_ros_3)/launch/mutant_navigation.launch">
     <arg name="map_file" value="$(arg map_file)"/>
@@ -25,8 +26,6 @@
   <node pkg="cr_ros_3" type="turtlebot_teleop_key.py" name="turtlebot_teleop_key" output="screen"></node>
   <node pkg="cr_ros_3" type="talk_queue.py" name="talk_queue" output="screen"></node>
   <node pkg="cr_ros_3" type="pickup_recovery.py" name="pickup_recovery" output="screen"></node>
-  <node pkg="cr_ros_3" type="hand_gesture.py" name="hand_gesture" output="screen"></node>
-  <node pkg="cr_ros_3" type="go_to_person.py" name="go_to_person" output="screen"></node>
   <node pkg="cr_ros_3" type="voice_destination_pub.py" name="voice_destination_pub" output="screen"></node>
   <node pkg="cr_ros_3" type="rover_controller.py" name="rover_controller" output="screen"></node>
 
@@ -35,6 +34,13 @@
   <arg name="fids" default="true"/>
   <group if="$(arg fids)">
    <include file="$(find cr_ros_3)/launch/fiducials.launch"/>
+  </group>
+
+
+  <!-- voice launch -->
+  <arg name="voice" default="true"/>
+  <group if="$(arg voice)">
+   <include file="$(find cr_ros_3)/launch/voice.launch"/>
   </group>
   <!-- NOTE: this 4-line block above can be used to modularly build a luanch file, with chunks of connected nodes that can be toggled on and off together-->
 
