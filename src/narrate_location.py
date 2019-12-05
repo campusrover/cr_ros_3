@@ -19,16 +19,22 @@ talker_pub = rospy.Publisher('/things_to_say', ThingsToSay, queue_size=1)
 
 location = None
 prev_location = None
+prev_doing = None
 
 rospy.init_node('location_narration')
+rate = rospy.Rate(.5)
 
 while not rospy.is_shutdown():
-    if location is None or location == prev_location: 
+    doing = str(get_state()).strip('States.').replace('_', ' ').lower()
+    if location is None or (location == prev_location and doing == prev_doing): 
         continue
-    doing = get_state().replace('_', ' ').lower()
-    rospy.loginfo('Robot is {0} near {1}'.format(doing, location))
-    talker_pub.publish(ThingsToSay(
-        say_at=time.time(),
-        to_say='I am {0} near {1}'.format(doing, location)
-    ))
-    prev_location = location
+    else:
+        
+        rospy.loginfo('Robot is {0} near {1}'.format(doing, location))
+        talker_pub.publish(ThingsToSay(
+            say_at=time.time(),
+            to_say='I am {0} near {1}'.format(doing, location)
+        ))
+        prev_location = location
+        prev_doing = doing
+    rate.sleep()

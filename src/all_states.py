@@ -28,6 +28,7 @@ class States(Enum):
 
 
     ILLEGAL_STATE_CHANGE = 'ILLEGAL_STATE_CHANGE'
+    UNKNOWN = 'UNKNOWN'
 
     DUMMY_POSE = Pose(position=Point(z=1))
     DUMMY_STRING = 'n0th1ng_t0_s4y'
@@ -38,7 +39,7 @@ def get_state():
         return States[__state_query().state_name] # returns state in format States.STATE, where STATE is NAVIGATING, WAITING, etc...
     except rospy.ServiceException:
         rospy.logerr('Error: state query service unavailable')
-        return None
+        return States.UNKNOWN
     #return current_state
 
 def change_state(new_state,
