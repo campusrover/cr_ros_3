@@ -61,12 +61,12 @@ read [the state interface guide](HOW_TO_USE_STATE_INTERFACE.md) to learn the zen
 Two different attempts have been made at facial recognition so far. 
 
 #### Gen 2
-see `greet.py`
+See `greet.py` in cr_ros_2. It has been removed from cr_ros_3
 
 #### Gen 3
 there is another repositiory in the campusrover group called [Robotic Computer Vision](https://github.com/campusrover/Robotics_Computer_Vision)
 running the `detect.py` script in that package will begin publishing facial recognition information. **NB** `detect.py` is not a ROS node but it will publish a ROS topic. Therefore you can run `detect.py` in the terminal by using `python`, not `rosrun` 
-`detect.py` communicates with `go_to_person.py` in cr_ros_3. 
+`detect.py` communicates with `go_to_person.py` in cr_ros_2. `go_to_person.py` has been removed from cr_ros_3.  
 `detect.py` requires a discrete GPU, and should probably not be run alongside other nodes on the same remote PC. 
 
 ## Hand gestures
@@ -74,16 +74,17 @@ running the `detect.py` script in that package will begin publishing facial reco
 
 ## State of the package report
 #### NOTE TO CONTRIBUTORS: please update this section after every sizable commit!
-11/25/19
-* All talking goes through `talk_queue` now - in addition, a new function has been added to `state_tools` to help new talking invocations get added
-* `rover_controller` has been edited to clear costmap and then resend the goal if navigation is aborted
-* **This pacakge is finally stable** - if all dependencies are installed,both onboard and offboard launches will open without any killer errors. 
-* Some new functions that are intended to make interacting with the state manager easier have been added. see the state_tools.py file to see what is available. for instance, before state tools, getting a boolean to check if the current state was a specific state had to be expressed as: `get_state() == States.WAITING` (if the desired state was waiting). Now, the same can be acheived via `current_state_is('waiting')`. 
-* Background changes have been made to make the package more compatible with cr_web
-* Haofan's Hand gesture node is AWOL. We've reached out to him to get the code, awaiting response
+12/4/19
+* Fiducial static trasforms have been edited and pose estimates have become more accurate and reliable as a result
+* Pickup recovery clears costmap after it is put back on the ground
+* Fiducal search should stop spinning after a fiducail is found
+* Voice launch has been updated and is now stable - install ngrok to get supported alexa commands. 
+* Waypoint launch has been brought back from the dead - the robot should now narrate it's behavior as it roams around the basement. 
+* Removed files that were not being used anymore - related to gen3 hand and facial detection, and gen2 package delivery
+
 
 
 Things that should/need to be done:
 * continue improving documentation - especially with regards to the alexa voice integration (instructions for launch, setup, etc)
 * add install scripts to automatically install all dependancies on both robot and remote pc
-* fix fiducial rotations in the static TF's and adjust mutant camera tf if needed (maybe also create a uniform height for all fids where center = camera lens height?)
+

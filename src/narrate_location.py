@@ -8,6 +8,7 @@ import rospy
 from std_msgs.msg import String
 from cr_ros_3.msg import ThingsToSay
 from all_states import *
+from state_tools import talker
 import time
 
 def update_location(msg):
@@ -26,15 +27,12 @@ rate = rospy.Rate(.5)
 
 while not rospy.is_shutdown():
     doing = str(get_state()).strip('States.').replace('_', ' ').lower()
-    if location is None or (location == prev_location and doing == prev_doing): 
+    if location is None or (location == prev_location and doing == prev_doing):  # if the combination of state + waypoint has not changed, then do nothing
         continue
     else:
         
-        rospy.loginfo('Robot is {0} near {1}'.format(doing, location))
-        talker_pub.publish(ThingsToSay(
-            say_at=time.time(),
-            to_say='I am {0} near {1}'.format(doing, location)
-        ))
-        prev_location = location
-        prev_doing = doing
+        rospy.loginfo('Robot is {0} near {1}'.format(doing, location))  # log behavior
+        talker('I am {0} near {1}'.format(doing, location), talker_pub)   # declare behavior
+        prev_location = location  # update location
+        prev_doing = doing  # update doing
     rate.sleep()

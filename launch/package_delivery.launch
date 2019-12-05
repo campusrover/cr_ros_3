@@ -1,5 +1,0 @@
-<launch>
-    <node pkg="cr_ros_3" type="package_sender.py" name="package_sender" output="screen"></node>
-    <node pkg="cr_ros_3" type="package_handler.py" name="package_handler" output="screen"></node>
-    <node pkg="cr_ros_3" type="recording_sender.py" name="recording_sender" output="screen"></node>
-</launch>
