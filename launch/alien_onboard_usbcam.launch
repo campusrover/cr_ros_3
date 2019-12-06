@@ -7,7 +7,7 @@
   <include file="$(find turtlebot3_bringup)/launch/turtlebot3_robot.launch"/>
 
   <!-- usb camera -->
-  <node pkg="usb_cam" type="usb_cam_node" name="usb_cam_node" output="screen"></node>
+  <node pkg="usb_cam" type="usb_cam_node" name="usb_cam_node"></node>
 
   <!-- Launch custom code -->
   <!-- Talk and cpu checker MUST run onboard-->

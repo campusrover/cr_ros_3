@@ -26,6 +26,8 @@ from cr_ros_3.msg import ThingsToSay
 from all_states import *
 from state_tools import *
 
+cam_topic = rospy.get_param("/rover_controller/cam_topic")
+
 FEEDBACK_STATUS = {
     "0":'PENDING', "1":'ACTIVE', "2":'PREEMPTED',
     "3":'SUCCEEDED', "4":'ABORTED', "5":'REJECTED', "6":'PREEMPTING',
@@ -117,7 +119,7 @@ web_camera_pub = rospy.Publisher('web/camera', CompressedImage, queue_size=1)
 web_state_pub = rospy.Publisher('web/state', String, queue_size=1)
 web_map_pub = rospy.Publisher('web/map', OccupancyGrid, queue_size=1, latch=True)
 # subscribers
-image_sub =  rospy.Subscriber('raspicam_node/image/compressed', CompressedImage, im_cb)
+image_sub =  rospy.Subscriber(cam_topic, CompressedImage, im_cb)
 
 # publishers
 teleop_pub = rospy.Publisher('teleop_keypress', UInt8, queue_size=100)

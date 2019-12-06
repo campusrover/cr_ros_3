@@ -22,9 +22,10 @@
   <!-- Launch custom code -->
   <!-- Add new nodes here-->
   <node pkg="cr_ros_3" type="turtlebot_teleop_key.py" name="turtlebot_teleop_key" output="screen"></node>
-  <node pkg="cr_ros_3" type="talk_queue.py" name="talk_queue" output="screen"></node>
   <node pkg="cr_ros_3" type="pickup_recovery.py" name="pickup_recovery" output="screen"></node>
-  <node pkg="cr_ros_3" type="rover_controller.py" name="rover_controller" output="screen"></node>
+  <node pkg="cr_ros_3" type="rover_controller.py" name="rover_controller" output="screen">
+    <param name="cam_topic" value="/usb_cam_node/image_raw/compressed"/>
+  </node>
 
 
   <!-- fiducials (Aruco + static fid transforms -->
