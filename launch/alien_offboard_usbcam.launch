@@ -1,0 +1,47 @@
+<!--
+  KeyOp launcher
+ -->
+
+<launch>
+  
+  <!-- Load amcl map -->
+  <arg name="map_file" default="$(find cr_ros_3)/files/basement_map_gen4.yaml"/> <!-- _for_robot -->
+
+  <!-- bringup flask webpage -->
+  <include file="$(find cr_web)/launch/bringup.launch"/>
+  
+  <!-- launch custom navigation package-->
+  <include file="$(find cr_ros_3)/launch/mutant_navigation.launch">
+    <arg name="map_file" value="$(arg map_file)"/>
+    <arg name="scan_topic" value="scan_filter"/>
+    <arg name="open_rviz" value="true"/>
+    <arg name="move_forward_only" value="false"/>
+  </include>
+
+
+  <!-- Launch custom code -->
+  <!-- Add new nodes here-->
+  <node pkg="cr_ros_3" type="turtlebot_teleop_key.py" name="turtlebot_teleop_key" output="screen"></node>
+  <node pkg="cr_ros_3" type="talk_queue.py" name="talk_queue" output="screen"></node>
+  <node pkg="cr_ros_3" type="pickup_recovery.py" name="pickup_recovery" output="screen"></node>
+  <node pkg="cr_ros_3" type="rover_controller.py" name="rover_controller" output="screen"></node>
+
+
+  <!-- fiducials (Aruco + static fid transforms -->
+  <arg name="fids" default="true"/>
+  <group if="$(arg fids)">
+   <include file="$(find cr_ros_3)/launch/alien_fiducials.launch"/>
+  </group>
+
+
+  <!-- voice launch -->
+  <arg name="voice" default="true"/>
+  <group if="$(arg voice)">
+   <include file="$(find cr_ros_3)/launch/voice.launch"/>
+  </group>
+  <!-- NOTE: this 4-line block above can be used to modularly build a luanch file, with chunks of connected nodes that can be toggled on and off together-->
+  <arg name="waypoints" default="true"/>
+  <group if="$(arg waypoints)">
+   <include file="$(find cr_ros_3)/launch/waypoints.launch"/>
+  </group>
+</launch>

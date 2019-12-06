@@ -1,0 +1,22 @@
+<!--
+  KeyOp launcher
+ -->
+
+<launch>
+  <!-- Bringup bot -->
+  <include file="$(find turtlebot3_bringup)/launch/turtlebot3_robot.launch"/>
+
+  <!-- usb camera -->
+  <node pkg="usb_cam" type="usb_cam_node" name="usb_cam_node" output="screen"></node>
+
+  <!-- Launch custom code -->
+  <!-- Talk and cpu checker MUST run onboard-->
+  <node pkg="cr_ros_3" type="talk.py" name="talk" output="screen"></node>
+  <node pkg="cr_ros_3" type="cpu_checker.py" name="cpu_checker" output="screen"></node>
+  <!-- These nodes could run offboard -->
+  <node pkg="cr_ros_3" type="talk_queue.py" name="talk_queue" output="screen"></node>
+  <node pkg="cr_ros_3" type="scan_filter.py" name="scan_filter" output="screen"></node>
+  <node pkg="cr_ros_3" type="pickup_detector.py" name="pickup_detector" output="screen"></node>
+  <node pkg="cr_ros_3" type="state.py" name="state" output="screen"></node>
+
+</launch>

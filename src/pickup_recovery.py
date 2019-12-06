@@ -8,12 +8,11 @@ import rospy
 import copy
 import numpy as np
 import math
-from cr_ros_3.srv import Talk
+from std_srvs.srv import Empty
 import actionlib
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from std_msgs.msg import Header, String, Bool
 from cr_ros_3.msg import ThingsToSay
-#from kobuki_msgs.msg import WheelDropEvent
 from geometry_msgs.msg import Twist, Vector3, Point, Pose, PoseStamped, PoseWithCovariance, PoseWithCovarianceStamped, Quaternion
 from all_states import *
 from state_tools import *
@@ -37,6 +36,7 @@ def flying_or_lost(msg):
             demand_state_change('lost')
             not_lost_anymore = False
             flying = False
+            costmap_clearer()
 
 
 
@@ -92,6 +92,7 @@ spin_pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
 dest_pub = rospy.Publisher('destination', PoseStamped, queue_size=1)
 goal_sub = rospy.Subscriber('destination', PoseStamped, save_goal)
 talker_pub = rospy.Publisher('/things_to_say', ThingsToSay, queue_size=1)
+costmap_clearer = rospy.ServiceProxy('/move_base/clear_costmaps', Empty)
 
 rate = rospy.Rate(10)
 
