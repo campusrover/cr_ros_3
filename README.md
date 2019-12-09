@@ -87,4 +87,7 @@ running the `detect.py` script in that package will begin publishing facial reco
 Things that should/need to be done:
 * continue improving documentation - especially with regards to the alexa voice integration (instructions for launch, setup, etc)
 * add install scripts to automatically install all dependancies on both robot and remote pc
+* implement methods to accomdate to the user's system, for instance: 
+    * a global environment variable to set user's preferred web browser of choice
+    * using variables to merge alien and mutant launches into one
 

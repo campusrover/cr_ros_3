@@ -1,14 +1,18 @@
 <launch>
-  <node pkg="cr_ros_3" type="process_fid_transforms.py" name="process_fid_transforms" output="screen"></node>
-  <!--  Run the throttled feed for the Aruco node-->
-  <node pkg="topic_tools" type="throttle" name="cam_throttle" args="messages /raspicam_node/image/compressed 2" />
-
-  <!-- Run the aruco_detect node -->
   <arg name="camera" default="raspicam_node"/>
   <arg name="image" default="image"/>
   <arg name="transport" default="compressed"/>
   <arg name="fiducial_len" default="0.14"/>
   <arg name="dictionary" default="7"/>
+  <arg name="cam_topic" default="/raspicam_node/image/compressed"/>
+
+  <node pkg="cr_ros_3" type="process_fid_transforms.py" name="process_fid_transforms" output="screen"></node>
+  
+  <!--  Run the throttled feed for the Aruco node-->
+  <node pkg="topic_tools" type="throttle" name="cam_throttle" args="messages $(arg cam_topic) 2" />
+
+  <!-- Run the aruco_detect node -->
+  
 
   <node pkg="aruco_detect" name="aruco_detect"
     type="aruco_detect" respawn="false">

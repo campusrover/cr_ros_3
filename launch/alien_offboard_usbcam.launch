@@ -31,7 +31,11 @@
   <!-- fiducials (Aruco + static fid transforms -->
   <arg name="fids" default="true"/>
   <group if="$(arg fids)">
-   <include file="$(find cr_ros_3)/launch/alien_fiducials.launch"/>
+   <include file="$(dirname)/fiducials.launch">
+     <arg name="camera" default="usb_cam_node"/>
+     <arg name="image" default="image_raw"/>
+     <arg name="cam_topic" default="/usb_cam_node/image_raw/compressed"/>
+   </include>
   </group>
 
 
