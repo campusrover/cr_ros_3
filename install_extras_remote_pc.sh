@@ -1,5 +1,5 @@
 #!/bin/bash
-cs 
+cs
 echo "[Cloning github repos]"
 git clone https://github.com/campusrover/cr_web.git
 git clone https://github.com/UbiquityRobotics/fiducials.git
@@ -10,4 +10,5 @@ cm
 cd ~
 echo "[Setting evironment variables]"
 sh -c "echo \"export WEB_BROWSER=google-chrome\" >> ~/.bashrc"
+sh -c "echo \"export CR_MODEL=MUTANT\" >> ~/.bashrc"
 echo "[Done!]"

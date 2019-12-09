@@ -6,6 +6,7 @@
   
   <!-- Load amcl map -->
   <arg name="map_file" default="$(find cr_ros_3)/files/basement_map_gen4.yaml"/> <!-- _for_robot -->
+  <arg name="robot" value="$(env CR_MODEL)"/>
 
   <!-- bringup flask webpage -->
   <include file="$(find cr_web)/launch/bringup.launch"/>
@@ -29,14 +30,30 @@
 
 
   <!-- fiducials (Aruco + static fid transforms -->
-  <arg name="fids" default="true"/>
-  <group if="$(arg fids)">
-   <include file="$(dirname)/fiducials.launch">
-     <arg name="camera" default="usb_cam_node"/>
-     <arg name="image" default="image_raw"/>
-     <arg name="cam_topic" default="/usb_cam_node/image_raw/compressed"/>
-   </include>
+  <group if="$(eval arg('robot') == 'ALIEN')">
+    <arg name="fids" default="true"/>
+    <group if="$(arg fids)">
+    <include file="$(dirname)/fiducials.launch">
+      <arg name="camera" value="usb_cam_node"/>
+      <arg name="image" value="image_raw"/>
+      <arg name="cam_topic" value="/usb_cam_node/image_raw/compressed"/>
+      <arg name="cam_height" value="0.73"/>
+    </include>
+    </group>
   </group>
+
+  <group if="$(eval arg('robot') == 'MUTANT')">
+    <arg name="fids" default="true"/>
+    <group if="$(arg fids)">
+    <include file="$(dirname)/fiducials.launch">
+      <arg name="camera" value="raspicam_node"/>
+      <arg name="image" value="image"/>
+      <arg name="cam_topic" value="/raspicam_node/image/compressed"/>
+      <arg name="cam_height" value="0.63"/>
+    </include>
+    </group>
+  </group>
+  
 
 
   <!-- voice launch -->
