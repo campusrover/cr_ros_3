@@ -96,7 +96,7 @@ running the `detect.py` script in that package will begin publishing facial reco
 
 ### NOTE TO CONTRIBUTORS: please update this section after every sizable commit!
 
-12/4/19
+12/9/19
 
 * This package is now 100% Alien compatible.
 * Alien launch files can now be used as universal launch files
