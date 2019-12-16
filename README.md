@@ -20,6 +20,8 @@ This will add everything* needed on the remote PC for this package. After runnin
 
 ## Setting up the Robot
 
+### Base Install
+
 After cloning this repo to your catkin workspace src directory, run the following command in a terminal:
 
 ``` sh
@@ -30,12 +32,30 @@ This will add MOST of what is needed to run the package on the robot. The except
 
 Just like the Remote PC setup, you will need to set `CR_MODEL` in .bashrc to accurately reflect the robot characteristics described above.
 
+### Camera Install
+
 For Mutant-like robots:
+
+Try the following:
+
+``` sh
+roscd cr_ros_3 && source install_raspi_cam.sh
+```
+
+If that doesn't work, then follow these manual instructions:
 
 1. [Follow the instructions under the first section titled "Installation" of the README](https://github.com/UbiquityRobotics/raspicam_node). Be sure to click the link and follow the instructions within, or else you will not be able to install via apt.
 2. `git clone https://github.com/UbiquityRobotics/raspicam_node.git` into `catkin_ws/src`.
 
 For Alien-like robots:
+
+Try the following:
+
+``` sh
+roscd cr_ros_3 && source install_usb_cam.sh
+```
+
+If that doesn't work, then follow these manual instructions:
 
 1. `git clone https://github.com/ros-drivers/usb_cam.git` into `catkin_ws/src`.
 2. `rosdep install usb_cam`
