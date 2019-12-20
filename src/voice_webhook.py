@@ -51,7 +51,7 @@ def get_slot_value(slots, detail):
     if detail in slots and 'resolutions' in slots.get(detail):
     	return slots.get(detail).get('resolutions').get('resolutionsPerAuthority') [0].get('values') [0].get('value').get('name')
 
-    return None;
+    return None
 
 
 def item_and_recipient(order):
@@ -213,7 +213,7 @@ def alexa_webhook():
 # run the app
 if __name__ == '__main__':
     app.run()
-    package_publisher.publish(False);
+    package_publisher.publish(False)
 
 
 rate = rospy.Rate(1)
